@@ -4,6 +4,22 @@
 
 Design a lightweight SteamVR Tracking-style controller with a knuckle-like form factor. The user wants the main visible hardware to sit above the first phalanges of the four non-thumb fingers, while keeping the controller center of mass as close as possible to the center of a clenched fist.
 
+## Product definition
+
+- The product is a **mirrored two-hand controller pair**.
+- Perfect mechanical symmetry is a recommendation, not an absolute requirement.
+- If practical, the design should separate the tracking module so the same tracking-module design can be reused between left and right hands.
+- The controller should remain on the hand when the hand opens, assuming the knuckle form factor and fastening method support this.
+- The SteamVR identity should be **controller**.
+- The initial target application is **Beat Saber only**.
+- Required inputs are minimal:
+  - one boolean touch input;
+  - one system button input.
+- Not required:
+  - finger tracking;
+  - grip button;
+  - capacitive touch sensing beyond the single boolean touch input.
+
 ## Known design constraints from discussion
 
 - The target device is a **controller**, not only a generic tracker.
@@ -26,11 +42,13 @@ The design should be separated into two functional regions:
    - Should be as light as possible.
    - Should not contain battery or other heavy components unless later proven necessary.
    - Should use a faceted or curved multi-face shape rather than a flat plate.
+   - May become a reusable common tracking module if the geometry works for both hands.
 
 2. **Palm/fist core / mass core**
-   - Holds heavier components: battery, main PCB, RP2350s, IMU, haptics, USB-C, wireless module.
+   - Holds heavier components: battery, main PCB, RP2350s, IMU, haptics if retained, USB-C, wireless module.
    - Should be positioned close to the clenched fist center.
    - Should minimize wrist torque and rotational inertia.
+   - May need handed shell or fastening differences even if the tracking module is common.
 
 ## Sensor placement concept
 
@@ -39,13 +57,13 @@ The 24 sensors should not be placed on one flat plane. The provisional grouping 
 | Group | Count | Purpose |
 |---|---:|---|
 | Top ridge | 6 | Visibility from above/front room-scale base stations |
-| Front slope | 4 | Pointing/aiming poses, forward visibility |
+| Front slope | 4 | Forward visibility and saber aiming/swing poses |
 | Rear slope | 4 | Visibility when the hand is pulled toward the body |
 | Thumb-side side face | 3 | Side visibility without relying on the thumb area |
 | Pinky-side side face | 3 | Side visibility during wrist roll |
 | Lower/front/rear auxiliary positions | 4 | Backup visibility when the upper bridge is occluded |
 
-This is only an initial layout. Actual hit-rate testing and sensor geometry calibration are still required.
+This is only an initial layout. Actual hit-rate testing and sensor geometry calibration are still required. Since Beat Saber is the current target, swing poses, wrist roll, crossed arms, and controllers moving near the torso should be tested early.
 
 ## OpenSCAD design approach
 
@@ -58,5 +76,6 @@ The initial SCAD model is intentionally a debug model. It should help answer:
 - Does the sensor FOV intersect the shell?
 - Where are heavy components located?
 - Where is the estimated center of mass?
+- Can a common tracking module be shared between left and right controllers?
 
 Later versions can replace placeholders with printable parts, screw bosses, cable channels, sensor board pockets, covers, and split lines.

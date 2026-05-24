@@ -4,12 +4,29 @@ This document records unresolved questions from the design discussion. Keep this
 
 ## Product definition
 
-- Is the controller right-hand only, left-hand only, or mirrored left/right pair?
-- Should left and right models be mechanically mirrored or share a symmetric core?
-- Is the controller meant to remain attached when the user opens their hand?
-- Does it need finger tracking, grip sensing, capacitive touch, or only normal controller inputs?
-- What SteamVR device identity is desired: controller, tracker, or custom driver-defined device?
-- What are the target applications: VRChat, general SteamVR games, motion capture, custom software, or development hardware?
+### Accepted decisions
+
+- The product is intended to be a **mirrored two-hand controller pair**.
+- It is recommended, but not mandatory, that the left and right controllers be perfectly mechanically symmetric.
+- If feasible, the tracking module should be separable/reusable so that a **common tracking module design** can be used on both hands.
+- The knuckle-style form factor is expected to remain attached to the hand even when the user opens their hand.
+- Finger tracking is **not required**.
+- Grip buttons are **not required**.
+- Touch sensing beyond one simple boolean touch input is **not required**.
+- Required user inputs are currently limited to:
+  - one boolean touch input;
+  - one system button input.
+- In SteamVR, the device should identify as a **controller**.
+- The target application is currently **Beat Saber only**.
+
+### Remaining product questions
+
+- Should the common tracking module be a physically detachable part, or only a shared PCB/mechanical subassembly reused in both left/right designs?
+- If a common tracking module is used, where should handedness-specific parts begin: shell only, input cap only, strap only, or full lower frame?
+- Does Beat Saber compatibility require emulating a specific existing controller input layout, or is a minimal custom SteamVR Input profile acceptable?
+- What should the boolean touch input represent in Beat Saber usage?
+- What should the system button physically look like and where should it be placed to avoid accidental presses?
+- Is haptic feedback required for Beat Saber feedback, or can it be omitted for mass reduction?
 
 ## Human factors
 
@@ -28,6 +45,7 @@ This document records unresolved questions from the design discussion. Keep this
 - Final fastening method is not defined: strap, ring, handle, glove mount, or hybrid.
 - Whether there is a lower palm handle is not finalized.
 - Whether the knuckle bridge is a single rigid shell, several small rigid boards, or rigid-flex is not finalized.
+- The separable/common tracking module concept is not yet mechanically defined.
 - Shell split lines are not defined.
 - Screw sizes are not defined.
 - Heat-set insert usage is not defined.
@@ -46,7 +64,7 @@ This document records unresolved questions from the design discussion. Keep this
 - Whether Base Station 2.0 only is acceptable is not decided.
 - Target tracking volume is not defined.
 - Target room setup is not defined: 1, 2, 3, or 4 base stations.
-- Expected controller poses are not ranked by importance.
+- Expected Beat Saber controller poses and swing motions are not yet ranked or modeled.
 - Occlusion caused by the hand, other controller, arms, torso, and props has not been tested.
 - Sensor FOV model is currently approximate.
 - Sensor aperture diameter and recess depth are not finalized.
@@ -79,6 +97,7 @@ This document records unresolved questions from the design discussion. Keep this
 - Sensor hit decoding responsibilities across two RP2350 MCUs are not defined.
 - Data transport from MCU to host is not defined.
 - SteamVR input profile is not defined.
+- Exact controller input mapping for Beat Saber is not defined.
 - Grip pose and aim pose are not defined.
 - Calibration storage format is not defined.
 - Manufacturing calibration procedure is not defined.

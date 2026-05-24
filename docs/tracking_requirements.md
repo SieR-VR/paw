@@ -2,7 +2,14 @@
 
 ## Tracking goal
 
-The controller should be trackable across common SteamVR use poses while being worn or held as a knuckle-style controller. The sensor geometry should prioritize robust visibility rather than merely fitting all sensors onto the upper shell.
+The controller should be trackable across Beat Saber-style use poses while being worn or held as a knuckle-style controller. The sensor geometry should prioritize robust visibility during fast saber swings, wrist rotation, crossed-arm motions, and near-torso controller positions rather than merely fitting all sensors onto the upper shell.
+
+## Product tracking identity
+
+- SteamVR identity target: **controller**.
+- Target application: **Beat Saber**.
+- Left/right usage: **mirrored controller pair**.
+- A common separable tracking module is desirable if it does not compromise tracking geometry, mass, or ergonomics.
 
 ## Sensor count
 
@@ -18,6 +25,7 @@ The design should aim to keep several spatially separated sensors visible from a
 - Avoid placing most sensors where fingers or thumb can cover them.
 - Distribute sensor normals across top, front, rear, left, right, and some lower directions.
 - Use enough baseline in X, Y, and Z so the pose solution is not geometrically fragile.
+- Prioritize Beat Saber motions: forward swings, downward cuts, upward cuts, wrist roll, crossed arms, and hands near the torso.
 
 ## Provisional coordinate system
 
