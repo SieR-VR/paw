@@ -100,6 +100,7 @@ fr_slot_height   = 22;      // inner slot Z height (finger thickness + clearance
 fr_wall          = 4.5;     // frame wall thickness all around
 fr_corner_radius = 6;       // rounding radius on inner and outer edges
 fr_frame_depth   = 10;      // frame thickness in Y direction
+fr_cut_clearance = 2;       // extra depth added to inner slot cut to ensure clean difference()
 fr_pos           = [0, 5, 12]; // frame center position
 
 // ---------- LOWER PALM HANDLE ----------
@@ -121,6 +122,11 @@ ti_trigger_h       = 10;             // Z height of trigger pad
 ti_button_d        =  8;             // system button diameter
 ti_gap             =  4;             // Z gap between trigger pad and button
 ti_guard_h         =  1.5;           // guard / separation ridge height
+ti_trigger_thickness = 0.5;          // protrusion depth of trigger pad surface
+ti_button_h          = 2.0;          // protrusion depth of system button cap
+ti_guard_offset      = 0.4;          // X offset of guard ridge from base slab face
+ti_guard_width       = 0.8;          // X thickness of guard ridge
+ti_guard_span_frac   = 0.85;         // guard ridge Y span as fraction of ti_plane_w
 
 // ---------- SNAP-LATCH PLACEHOLDER ----------
 // Interface between detachable tracking module (bridge) and palm/fist core.

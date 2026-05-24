@@ -15,8 +15,8 @@ module thumb_input_plane() {
         // Trigger pad — larger, occupies the fingertip-side (+Z) portion of the plane.
         trigger_z_off = ti_button_d / 2 + ti_gap / 2 + ti_trigger_h / 2;
         color("deepskyblue", 0.75)
-            translate([ti_plane_thickness / 2 + 0.5, 0, trigger_z_off])
-                cube([0.5, ti_trigger_w, ti_trigger_h], center = true);
+            translate([ti_plane_thickness / 2 + ti_trigger_thickness / 2, 0, trigger_z_off])
+                cube([ti_trigger_thickness, ti_trigger_w, ti_trigger_h], center = true);
 
         // System button — smaller, wrist-side (-Z) portion of the plane.
         // Cylinder axis along X so the button face is visible from +X.
@@ -24,12 +24,12 @@ module thumb_input_plane() {
         color("orangered", 0.85)
             translate([ti_plane_thickness / 2, 0, button_z_off])
                 rotate([0, 90, 0])
-                    cylinder(d = ti_button_d, h = 2.0, center = true);
+                    cylinder(d = ti_button_d, h = ti_button_h, center = true);
 
         // Guard / separation ridge between trigger pad and system button.
         // Provides a tactile break and visual indication of accidental-press protection.
         color("dimgray", 0.90)
-            translate([ti_plane_thickness / 2 + 0.4, 0, 0])
-                cube([0.8, ti_plane_w * 0.85, ti_guard_h], center = true);
+            translate([ti_plane_thickness / 2 + ti_guard_offset, 0, 0])
+                cube([ti_guard_width, ti_plane_w * ti_guard_span_frac, ti_guard_h], center = true);
     }
 }

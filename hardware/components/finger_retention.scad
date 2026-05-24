@@ -27,7 +27,7 @@ module finger_retention_frame() {
             for (sx = [-1, 1], sz = [-1, 1])
                 translate([sx * (fr_slot_width / 2 - r), 0, sz * (fr_slot_height / 2 - r)])
                     rotate([90, 0, 0])
-                        cylinder(r = r, h = d + 2, center = true);
+                        cylinder(r = r, h = d + fr_cut_clearance, center = true);
         }
     }
 }
