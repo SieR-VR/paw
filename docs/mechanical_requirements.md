@@ -69,6 +69,23 @@ The lower or palm-side core should:
 - The system button should be protected against accidental presses during Beat Saber swings.
 - Input placement should not cause the thumb to occlude critical tracking sensors during normal use.
 
+## Human-factor parameter strategy
+
+Detailed Human Factors decisions are intentionally deferred for now.
+
+For early OpenSCAD work, computer-vision hand measurement from photos may be used to produce initial values and thresholds. These values should be treated as starting estimates rather than final dimensions.
+
+Fit-critical parameters should later be tuned through printed prototypes. Once a 3D printer is available, direct fitting can use iterative methods such as binary search or bracketed search. Candidate parameters for physical tuning include:
+
+- bridge clearance above fingers;
+- bridge height and width;
+- side clearance;
+- strap/ring/handle tightness;
+- thumb input position;
+- system-button separation;
+- latch feel and release force;
+- comfort around pressure points.
+
 ## Provisional print assumptions
 
 The SCAD defaults assume a rough FDM/SLA prototype stage:

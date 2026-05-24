@@ -65,6 +65,14 @@ The design is currently split into two main assemblies:
    - May need handed shell or fastening differences even if the tracking module is common.
    - Should provide thumb-reachable locations for the boolean trigger/touch input and system button on the same plane.
 
+## Human-factor parameter strategy
+
+Detailed Human Factors decisions are intentionally deferred for now.
+
+The current plan is to use computer vision from hand photos as an **initialization and threshold-setting method**, not as the final authority for ergonomic fit. CV-based hand measurement can provide initial OpenSCAD parameters such as knuckle width, finger spacing, approximate phalanx lengths, and rough thumb input regions.
+
+Final comfort-related and fit-critical parameters should be refined later using physical prototypes. Once a 3D printer is available, those values can be tuned through iterative fitting methods such as binary search or bracketed search. This is especially important for parameters that are difficult to infer reliably from photographs, including clearances, pressure points, bridge height, strap tension, latch feel, and thumb reach comfort.
+
 ## Sensor placement concept
 
 The 24 sensors should not be placed on one flat plane. The provisional grouping is:

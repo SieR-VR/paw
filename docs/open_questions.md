@@ -38,6 +38,8 @@ This document records unresolved questions from the design discussion. Keep this
 - Haptic actuator selection should reference examples from other devices before committing to a specific actuator type.
 - Sensor placement should cover a range slightly wider than typical expected use so that tracking remains robust outside ordinary hand poses.
 - Beat Saber motion coverage should be quantified by parsing **BeatLeader BSOR replay files** if practical.
+- Human-factor CV measurement is accepted as a way to generate initial parameters and thresholds, not final fit dimensions.
+- Final fit-critical human-factor parameters should be refined with physical prints using iterative fitting, such as binary search or bracketed search.
 
 ### Remaining product questions
 
@@ -54,6 +56,17 @@ This document records unresolved questions from the design discussion. Keep this
 - What BSOR dataset should be used for motion analysis: one user, multiple users, expert maps, casual maps, full-body modifiers, or a curated test set?
 
 ## Human factors
+
+Detailed Human Factors decisions are intentionally deferred for now.
+
+Current strategy:
+
+- Use CV from hand photos to generate initial OpenSCAD parameters and thresholds.
+- Treat CV-derived values as starting estimates, not final ergonomic truth.
+- Once 3D printing is available, tune fit-critical parameters through printed prototypes.
+- Use iterative fitting methods such as binary search or bracketed search where practical.
+
+Unresolved examples for later:
 
 - Target hand size range is not defined.
 - Exact knuckle width is not defined.
