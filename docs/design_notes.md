@@ -9,16 +9,21 @@ Design a lightweight SteamVR Tracking-style controller with a knuckle-like form 
 - The product is a **mirrored two-hand controller pair**.
 - Perfect mechanical symmetry is a recommendation, not an absolute requirement.
 - If practical, the design should separate the tracking module so the same tracking-module design can be reused between left and right hands.
+- A physically detachable tracking module is preferred if it does not compromise rigidity, tracking geometry, center of mass, or build complexity too much.
 - The controller should remain on the hand when the hand opens, assuming the knuckle form factor and fastening method support this.
 - The SteamVR identity should be **controller**.
 - The initial target application is **Beat Saber only**.
+- A custom/new SteamVR Input profile is preferred.
 - Required inputs are minimal:
-  - one boolean touch input;
+  - one boolean touch input mapped as the trigger;
   - one system button input.
+- Both the boolean trigger/touch input and system button should be reachable by the thumb.
 - Not required:
   - finger tracking;
   - grip button;
-  - capacitive touch sensing beyond the single boolean touch input.
+  - capacitive touch sensing beyond the single boolean touch/trigger input.
+- Haptics are desirable if they can be added without unacceptable mass, power, or ergonomic cost.
+- Sensor placement should intentionally cover a slightly wider range than normal expected use to improve robustness in off-nominal poses.
 
 ## Known design constraints from discussion
 
@@ -29,7 +34,7 @@ Design a lightweight SteamVR Tracking-style controller with a knuckle-like form 
 - The tentative electronics architecture uses **two RP2350 MCUs** and their PIO blocks to capture signals from **24 TS4231 channels**.
 - The user prefers a **knuckle-like handle**.
 - The upper structure should sit above the first phalanges of the index, middle, ring, and pinky fingers.
-- The thumb should remain mostly excluded from the upper bridge region.
+- The thumb should remain mostly excluded from the upper bridge region, except for thumb-reachable input surfaces/buttons.
 - The center of mass should be near the middle of a clenched fist.
 - Total mass should be as low as practical.
 
@@ -43,12 +48,14 @@ The design should be separated into two functional regions:
    - Should not contain battery or other heavy components unless later proven necessary.
    - Should use a faceted or curved multi-face shape rather than a flat plate.
    - May become a reusable common tracking module if the geometry works for both hands.
+   - May be physically detachable if retention/alignment can be made rigid and lightweight.
 
 2. **Palm/fist core / mass core**
    - Holds heavier components: battery, main PCB, RP2350s, IMU, haptics if retained, USB-C, wireless module.
    - Should be positioned close to the clenched fist center.
    - Should minimize wrist torque and rotational inertia.
    - May need handed shell or fastening differences even if the tracking module is common.
+   - Should provide thumb-reachable locations for the boolean trigger/touch input and system button.
 
 ## Sensor placement concept
 
@@ -63,7 +70,7 @@ The 24 sensors should not be placed on one flat plane. The provisional grouping 
 | Pinky-side side face | 3 | Side visibility during wrist roll |
 | Lower/front/rear auxiliary positions | 4 | Backup visibility when the upper bridge is occluded |
 
-This is only an initial layout. Actual hit-rate testing and sensor geometry calibration are still required. Since Beat Saber is the current target, swing poses, wrist roll, crossed arms, and controllers moving near the torso should be tested early.
+This is only an initial layout. Actual hit-rate testing and sensor geometry calibration are still required. Since Beat Saber is the current target, swing poses, wrist roll, crossed arms, hands near the torso, and somewhat wider-than-normal motion coverage should be tested early.
 
 ## OpenSCAD design approach
 
@@ -77,5 +84,7 @@ The initial SCAD model is intentionally a debug model. It should help answer:
 - Where are heavy components located?
 - Where is the estimated center of mass?
 - Can a common tracking module be shared between left and right controllers?
+- Can that common tracking module be physically detachable while preserving sensor rigidity and calibration?
+- Where can thumb-reachable trigger/touch and system-button inputs fit?
 
 Later versions can replace placeholders with printable parts, screw bosses, cable channels, sensor board pockets, covers, and split lines.
