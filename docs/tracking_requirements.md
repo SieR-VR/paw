@@ -13,6 +13,10 @@ The sensor layout should also include some margin beyond ordinary expected use. 
 - Left/right usage: **mirrored controller pair**.
 - A common separable tracking module is desirable if it does not compromise tracking geometry, mass, or ergonomics.
 - A physically detachable tracking module is preferred if it can preserve sensor alignment and calibration.
+- Detachable tracking module retention preference: **latch**.
+- Tracking module contents: optical sensors plus two RP2350 MCUs.
+- Palm/fist core contents: main MCU, IMU, battery, buttons/inputs, and other support electronics where practical.
+- Module-to-core communication: **pogo pins**.
 
 ## Sensor count
 
@@ -30,6 +34,7 @@ The design should aim to keep several spatially separated sensors visible from a
 - Use enough baseline in X, Y, and Z so the pose solution is not geometrically fragile.
 - Prioritize Beat Saber motions: forward swings, downward cuts, upward cuts, wrist roll, crossed arms, and hands near the torso.
 - Include additional angular coverage beyond the typical saber pose to improve recovery from off-nominal positions.
+- Use BSOR replay analysis to refine these assumptions where possible.
 
 ## Provisional coordinate system
 
@@ -64,10 +69,26 @@ The actual OpenSCAD placeholder layout is in `hardware/components/sensor_layout_
 If the tracking module becomes physically detachable, the following constraints apply:
 
 - Reattachment must preserve sensor positions and normals closely enough for calibration to remain valid, or the module must carry its own calibration identity.
-- The mechanical interface should include repeatable locating features, not only screws or magnets.
+- The latch should provide retention force, but repeatable locating features should define position and rotation.
+- The pogo-pin interface should not be used as the primary mechanical locating feature.
 - Electrical connectors must not introduce excessive bulk near the upper bridge.
-- The detachable boundary should not place heavy components far from the fist center unless necessary.
+- The detachable boundary should keep battery and other heavy parts in the palm/fist core unless later evidence suggests otherwise.
+- The tracking module should include the two RP2350 MCUs so high-rate optical capture remains close to the sensors.
 - Left/right reuse must be checked against Beat Saber occlusion and wrist-roll poses.
+
+## BSOR-based tracking margin analysis
+
+BeatLeader BSOR replay parsing is the preferred way to quantify Beat Saber motion coverage. Desired outputs include:
+
+- Position and orientation distributions for left/right controllers.
+- Controller orientation relative to the HMD/player body if available.
+- Linear velocity and acceleration estimates.
+- Angular velocity estimates.
+- Extreme high/low/left/right/near-body positions.
+- Crossed-arm and near-torso cases.
+- Percentile envelopes, such as 50%, 90%, 95%, 99%, and max observed poses.
+
+The sensor layout can then be evaluated against a target envelope rather than only anecdotal Beat Saber poses.
 
 ## FOV modeling
 
