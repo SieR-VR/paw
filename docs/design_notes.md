@@ -10,7 +10,7 @@ Design a lightweight SteamVR Tracking-style controller with a knuckle-like form 
 - Perfect mechanical symmetry is a recommendation, not an absolute requirement.
 - If practical, the design should separate the tracking module so the same tracking-module design can be reused between left and right hands.
 - A physically detachable tracking module is preferred if it does not compromise rigidity, tracking geometry, center of mass, or build complexity too much.
-- The preferred detachable-module retention method is a **latch**.
+- The preferred detachable-module retention method is a **snap latch**.
 - The detachable tracking module should include the optical sensor modules and the two RP2350 MCUs used for sensor capture.
 - The remaining main electronics should live in the palm/fist core where possible: main MCU, IMU, battery, buttons, wireless, charging, and related support electronics.
 - The module-to-core connection should use **pogo pins**.
@@ -49,7 +49,7 @@ Design a lightweight SteamVR Tracking-style controller with a knuckle-like form 
 
 The design is currently split into two main assemblies:
 
-1. **Latch-detachable tracking module**
+1. **Snap-latch-detachable tracking module**
    - Holds optical sensor modules.
    - Holds the two RP2350 MCUs used for optical capture.
    - Should be as light as possible.
@@ -57,6 +57,10 @@ The design is currently split into two main assemblies:
    - Should preserve sensor position/normal calibration after attachment.
    - Should connect to the palm/fist core via pogo pins.
    - Should remain reusable between left and right controllers if the geometry works for both hands.
+   - Should use separate features for alignment, retention, and electrical connection:
+     - alignment: rail, locating boss/pin, cone, or equivalent repeatable locating feature;
+     - retention: snap latch;
+     - electrical connection: pogo pins.
 
 2. **Palm/fist core / mass core**
    - Holds heavier components: battery, main MCU, IMU, haptics if retained, USB-C, wireless module, charging/power electronics, and user input PCB.
@@ -64,6 +68,63 @@ The design is currently split into two main assemblies:
    - Should minimize wrist torque and rotational inertia.
    - May need handed shell or fastening differences even if the tracking module is common.
    - Should provide thumb-reachable locations for the boolean trigger/touch input and system button on the same plane.
+   - Should include a rounded or oval lower palm handle.
+   - Should include the receiver for the tracking-module rail/locating features, snap latch, and pogo-pin interface.
+
+## Recommended mechanical architecture
+
+The current recommended architecture is:
+
+```text
+[Detachable Tracking Module]
+- upper knuckle bridge / sensor crown
+- 24 TS4231 + photodiode sensor positions
+- 2 RP2350 MCUs
+- local sensor routing or small sensor boards
+- snap-latch retention feature
+- locating rail/pin/boss features
+- pogo-pin contact pads
+
+[Palm/Fist Core]
+- four-finger hole frame or rounded four-finger slot
+- rounded/oval lower palm handle
+- battery
+- main MCU
+- IMU
+- wireless/charging/power electronics
+- optional haptic actuator
+- thumb-side input PCB:
+  - capacitive trigger pad
+  - system button
+- pogo-pin receiver
+- snap-latch receiver
+- tracking-module locating receiver
+```
+
+## Finger retention concept
+
+The controller should be retained by placing the four non-thumb fingers through a knuckle-style opening. The current recommendation is to start with a single large rounded four-finger slot rather than four tight individual hard rings.
+
+Reasons:
+
+- easier to print and iterate;
+- lower risk of pressure points;
+- easier to accommodate hand-size variation;
+- less likely to trap or injure fingers during sudden motion;
+- can later be divided into individual openings if testing shows it is beneficial.
+
+The opening should be rounded, slightly oversized, and compatible with later soft liners or TPU inserts.
+
+## Lower palm handle and input concept
+
+The palm/fist core should include a rounded or oval handle below the palm. A fully circular cylinder is not preferred because it can rotate in the hand; an oval or rounded-rectangle section provides orientation and packaging space.
+
+The thumb-side end of the handle should include the input plane:
+
+- large PCB-trace/electrode capacitive trigger pad;
+- smaller physical system button;
+- both on the same plane and reachable by the thumb;
+- physical separation, ridge, or recess between them to reduce accidental system-button activation.
 
 ## Human-factor parameter strategy
 
@@ -104,7 +165,8 @@ The initial SCAD model is intentionally a debug model. It should help answer:
 - Where are heavy components located?
 - Where is the estimated center of mass?
 - Can a common tracking module be shared between left and right controllers?
-- Can that common tracking module be latch-detachable while preserving sensor rigidity and calibration?
+- Can that common tracking module be snap-latch-detachable while preserving sensor rigidity and calibration?
 - Where can thumb-reachable trigger/touch and system-button inputs fit on the same plane?
+- Can the four-finger slot, lower palm handle, latch receiver, and pogo-pin receiver be modeled as separate adjustable modules?
 
-Later versions can replace placeholders with printable parts, screw bosses, latch geometry, pogo-pin interfaces, cable channels, sensor board pockets, covers, and split lines.
+Later versions can replace placeholders with printable parts, screw bosses, snap-latch geometry, pogo-pin interfaces, cable channels, sensor board pockets, covers, and split lines.

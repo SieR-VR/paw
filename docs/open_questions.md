@@ -10,7 +10,7 @@ This document records unresolved questions from the design discussion. Keep this
 - It is recommended, but not mandatory, that the left and right controllers be perfectly mechanically symmetric.
 - If feasible, the tracking module should be separable/reusable so that a **common tracking module design** can be used on both hands.
 - A **physically detachable tracking module** is preferred if it can be achieved without major penalties to mass, rigidity, sensor geometry, or assembly complexity.
-- The detachable tracking module should use a **latch-based retention mechanism**.
+- The detachable tracking module should use a **snap-latch-based retention mechanism**.
 - The detachable tracking module should include:
   - optical sensor modules;
   - the two RP2350 MCUs used for optical capture.
@@ -21,7 +21,9 @@ This document records unresolved questions from the design discussion. Keep this
   - buttons/input surfaces;
   - wireless/power/charging electronics, unless later architecture changes require otherwise.
 - Communication between the detachable tracking module and palm/fist core should use **pogo pins**.
-- The knuckle-style form factor is expected to remain attached to the hand even when the user opens their hand.
+- The knuckle-style form factor should retain the controller by placing the four non-thumb fingers through a rounded opening/slot.
+- A rounded/oval lower palm handle should sit under the palm.
+- The thumb-side end of the handle should carry the trigger/touch pad and system button.
 - Finger tracking is **not required**.
 - Grip buttons are **not required**.
 - Touch sensing beyond one simple boolean touch input is **not required**.
@@ -41,10 +43,34 @@ This document records unresolved questions from the design discussion. Keep this
 - Human-factor CV measurement is accepted as a way to generate initial parameters and thresholds, not final fit dimensions.
 - Final fit-critical human-factor parameters should be refined with physical prints using iterative fitting, such as binary search or bracketed search.
 
-### Remaining product questions
+### Accepted mechanical recommendations
 
-- What latch geometry is preferred: sliding latch, snap latch, spring latch, push-button release, or another latch style?
-- Should the latch be user-serviceable without tools?
+- Start with one large rounded four-finger slot rather than four tight hard rings.
+- Consider optional soft liners or TPU inserts later.
+- Use an oval or rounded-rectangle lower palm handle rather than a perfect cylinder.
+- Keep the capacitive trigger pad large and easy to reach.
+- Keep the system button smaller, physically distinct, and protected by recess/ridge/separation.
+- Use snap latch for retention, but not for precise alignment.
+- Use rails, locating pins/bosses, dovetails, cones, or equivalent features for repeatable alignment.
+- Use pogo pins only for electrical connection, not structural alignment.
+- Reserve space for roughly 10-12 pogo contacts until the electrical interface is finalized.
+- Start sensor hardware with replaceable individual small rigid sensor boards and wires before committing to rigid-flex.
+- Build early structures somewhat robustly, then selectively reinforce or lighten after tests.
+- Prefer ribs, fillets, gussets, closed sections, and local reinforcement over simply thickening every wall.
+- Split the shell into serviceable parts: tracking module, palm core body, palm core cover, finger slot/frame, and thumb input cap/cover.
+- Use mostly M2.5 fasteners for serviceable shell joints, M2 for small covers, M3 for high-load structures, and M1.6/M2 for sensor boards.
+- Use heat-set inserts where repeated disassembly is expected and wall thickness permits.
+- Separate sensor/timing routing from power/haptic wiring.
+- Make early sensor boards replaceable.
+- Use a serviceable internal battery rather than a fully user-swappable battery for early prototypes.
+- Target sweat resistance rather than waterproofing for early prototypes.
+- Use PLA/PETG for early fit tests, stronger PETG/ABS/ASA for swing tests, and consider SLS/MJF nylon for higher-quality functional prototypes.
+
+### Remaining product/mechanical questions
+
+- What exact snap-latch geometry is preferred: sliding snap, cantilever snap, push-button release, side release, or another style?
+- Should the latch be one-handed and tool-less?
+- What is the tracking module insertion direction: front-to-back slide, rear-to-front slide, vertical drop-in, or side slide?
 - What pogo-pin count, pitch, current rating, and signal assignment are required?
 - What should be the exact module boundary between the RP2350 tracking module and palm/fist core?
 - Which component owns time synchronization: the tracking module, the palm/fist core MCU, or a shared clock/sync line across pogo pins?
@@ -71,6 +97,7 @@ Unresolved examples for later:
 - Target hand size range is not defined.
 - Exact knuckle width is not defined.
 - Finger pitch values are not defined.
+- Four-finger slot width and height are not defined.
 - Maximum allowed bridge height over the first phalanges is not defined.
 - Required skin clearance under the bridge is not defined.
 - The first phalanx reference point needs clarification: MCP-to-PIP region, MCP ridge, or another anatomical reference.
@@ -78,22 +105,23 @@ Unresolved examples for later:
 - Whether gloves are used is not defined.
 - Whether the hand grip should be relaxed, clenched, or semi-open is not defined.
 - Thumb reach envelope for trigger/touch and system button is not defined.
+- Oval lower handle dimensions are not defined.
 
 ## Mechanical structure
 
-- Final fastening method to the hand is not defined: strap, ring, handle, glove mount, or hybrid.
-- Whether there is a lower palm handle is not finalized.
+- Final detailed fastening method to the hand is not fully defined, but the current direction is four-finger slot plus lower palm handle.
 - Whether the knuckle bridge is a single rigid shell, several small rigid boards, or rigid-flex is not finalized.
-- The separable/common tracking module concept is latch-based but not yet mechanically defined.
+- The separable/common tracking module concept is snap-latch-based but not yet mechanically defined in detail.
+- Tracking-module locating features are recommended but not yet modeled.
 - Detachable tracking-module retention, alignment, electrical connector, and rigidity requirements are not fully defined.
-- Shell split lines are not defined.
-- Screw sizes are not defined.
-- Heat-set insert usage is not defined.
-- Cable channels are not defined.
-- Sensor board replacement strategy is not defined.
-- Battery replacement strategy is not defined.
-- Drop resistance targets are not defined.
-- Water/sweat/dust protection requirements are not defined.
+- Shell split lines are recommended but not yet modeled.
+- Screw sizes are recommended but not yet applied to CAD.
+- Heat-set insert usage is recommended but not yet applied to CAD.
+- Cable channels are recommended but not yet modeled.
+- Sensor board replacement is recommended for early prototypes but not yet modeled.
+- Battery replacement should be serviceable through a cover, but the cover is not yet modeled.
+- Drop resistance target is preliminary and not tested.
+- Sweat resistance is recommended but not yet designed.
 
 ## Tracking geometry
 
@@ -152,10 +180,10 @@ Unresolved examples for later:
 
 ## Manufacturing
 
-- Prototype process is not decided: FDM, SLA, SLS, CNC, or another method.
-- Minimum wall thickness is not defined.
+- Prototype process recommendation exists, but final process is not decided.
+- Minimum wall thickness has starting recommendations but is not validated.
 - Tolerances are not defined.
-- Material is not defined.
+- Material is not finalized.
 - Surface finish is not defined.
 - Black/IR-reflective material behavior is not defined.
 - Production process is not decided.
