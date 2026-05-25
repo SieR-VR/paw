@@ -32,8 +32,8 @@ docs/
   electronics_requirements.md
   bsor_motion_analysis.md
 hardware/components/
-  paw_controller.scad
-  controller_params.scad
+  paw_controller.scad          — top-level assembly
+  controller_params.scad       — all shared parameters and debug toggles
   coordinate_system.scad
   hand_reference.scad
   knuckle_bridge.scad
@@ -42,6 +42,11 @@ hardware/components/
   electronics_placeholders.scad
   center_of_mass.scad
   debug_visualization.scad
+  finger_retention.scad        — four-finger slot / retention frame placeholder
+  palm_handle.scad             — oval lower palm handle placeholder
+  thumb_input_plane.scad       — thumb-side trigger pad + system button placeholder
+  snap_latch_placeholder.scad  — snap-latch + alignment rail/boss placeholder
+  pogo_pin_interface.scad      — pogo-pin contact array placeholder
 ```
 
 ## Current design direction
@@ -83,10 +88,15 @@ Useful toggles are defined in `hardware/components/controller_params.scad`:
 - `show_electronics`
 - `show_center_of_mass`
 - `show_debug_axes`
+- `show_finger_retention`
+- `show_palm_handle`
+- `show_thumb_input`
+- `show_snap_latch`
+- `show_pogo_interface`
 
 ## Next steps
 
-1. Update the OpenSCAD model to include the four-finger slot, lower palm handle, thumb input plane, snap-latch placeholder, and pogo-pin placeholder.
+1. ~~Update the OpenSCAD model to include the four-finger slot, lower palm handle, thumb input plane, snap-latch placeholder, and pogo-pin placeholder.~~ ✅ Done.
 2. Measure or estimate target hand dimensions.
 3. Define the actual TS4231 + photodiode board size.
 4. Define tracking-module PCB dimensions for the two RP2350s.
